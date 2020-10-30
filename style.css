@@ -1,0 +1,16 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-elements {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  margin: 30px 0;
+}
+
+.restart {
+  cursor: pointer;
+}
