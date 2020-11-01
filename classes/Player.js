@@ -1,14 +1,38 @@
 class Player {
   constructor() {
-    this.x = 60;
-    this.y = 400;
+    this.x = 480;
+    this.y = 130;
     this.width = 32;
     this.height = 32;
     this.gravity = 0.2;
     this.velocity = 0;
-    this.floor = 400;
+    this.floor = HEIGHT - 78;
     this.jumpCounts = 0;
     this.movement = "idle";
+    this.isFrozen = false;
+  }
+
+  spawn() {
+    this.x = 480;
+    this.y = 130;
+  }
+
+  freeze() {
+    this.isFrozen = true;
+  }
+
+  unfreeze() {
+    this.isFrozen = false;
+  }
+
+  findFloor() {
+    if (this.velocity >= 0 && this.y < 250 && this.x < 240) {
+      return HEIGHT - 206;
+    } else if (this.y < 140 && this.x > 355) {
+      return HEIGHT - 270;
+    } else {
+      return HEIGHT - 78;
+    }
   }
 
   collisionCheck(obstacle) {
@@ -30,17 +54,16 @@ class Player {
     }
   }
 
-  spawn() {
-    this.x = 60;
-    this.y = 400;
-  }
-
   reset() {
     this.movement = "idle";
   }
 
   moveRight() {
-    if (this.x >= WIDTH - this.width) {
+    if (this.isFrozen) return;
+
+    if (this.y < 140 && this.x >= WIDTH - 105) {
+      return; 
+    } else if (this.x >= WIDTH - 70) {
       return;
     }
     this.x += 2;
@@ -48,7 +71,9 @@ class Player {
   }
 
   moveLeft() {
-    if (this.x <= 10) {
+    if (this.isFrozen) return;
+
+    if (this.x <= 70) {
       return;
     }
     this.x -= 2;
@@ -56,6 +81,8 @@ class Player {
   }
 
   jump() {
+    if (this.isFrozen) return;
+
     if (this.jumpCounts === 2) {
       return;
     }
@@ -66,10 +93,12 @@ class Player {
   }
 
   isInTheAir() {
-    return this.y < 400;
+    return this.y < this.floor;
   }
 
   draw() {
+    this.floor = this.findFloor();
+
     this.velocity += this.gravity;
     this.y += this.velocity;
 
@@ -77,6 +106,9 @@ class Player {
       this.y = this.floor;
       this.velocity = 0;
       this.jumpCounts = 0;
+    } else if (this.y <= 0) {
+      this.y = 0;
+      this.velocity = 1;
     }
 
     if (this.movement === "idle") {

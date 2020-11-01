@@ -4,11 +4,11 @@ class Background {
   }
 
   setup() {
-    this.width = width;
-    this.height = height;
+    this.width = WIDTH;
+    this.height = HEIGHT;
   }
 
   draw() {
-    image(bgImage, this.x, 0, this.width, this.height);
+    image(bgLevelOne, this.x, 0, this.width, this.height);
   }
 }

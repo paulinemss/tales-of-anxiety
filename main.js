@@ -1,6 +1,3 @@
-const message = document.querySelector(".message");
-const restartBtn = document.querySelector(".restart");
-
 function preload() {
   playerIdle = loadSpriteSheet("/assets/player/idle.png", 32, 32, 11);
   playerRunRight = loadSpriteSheet("/assets/player/runRight.png", 32, 32, 12);
@@ -11,7 +8,9 @@ function preload() {
   monsterRunRight = loadSpriteSheet("/assets/monster/runRight.png", 44, 30, 10);
   monsterRunLeft = loadSpriteSheet("/assets/monster/runLeft.png", 44, 30, 10);
   endPoint = loadSpriteSheet("/assets/terrain/endPoint.png", 64, 64, 17);
-  bgImage = loadImage("/assets/terrain/bckg-test.png");
+  bgLevelOne = loadImage("/assets/terrain/Level1.png");
+
+  gameFont = loadFont("/assets/font/PressStart2P-Regular.ttf")
 
   playerIdleAnimation = loadAnimation(playerIdle);
   playerRunRightAnimation = loadAnimation(playerRunRight);
@@ -24,32 +23,61 @@ function preload() {
   endPointAnimation = loadAnimation(endPoint);
 }
 
+const intro = new Intro();
 const game = new Game();
+const textBox = new TextBox();
+const winning = new Winning();
+
+let level = "beginning";
+let hasSeenIntroduction = false;
 
 function setup() {
-  createCanvas(WIDTH, 500);
+  createCanvas(WIDTH, HEIGHT);
   game.setup();
+  textBox.setup();
 }
 
 function draw() {
   clear();
-  background("thistle");
-  game.draw();
+  background("snow");
+  textBox.draw();
 
-  if (game.player.collisionCheck(game.monster)) {
-    message.innerText = "GAME OVER!";
-    noLoop();
+  if (level === "beginning") {
+    intro.draw();
+  } else if (level === "level 1") {
+    game.draw();
+  } else if (level === "winning") {
+    winning.draw();
   }
 
-  if (game.player.collisionCheck(game.myEndPoint)) {
-    message.innerText = "YOU WIN!";
-    noLoop();
+  // if (game.player.collisionCheck(game.monster)) {
+  //   message.innerText = "GAME OVER!";
+  //   noLoop();
+  // }
+
+  if (!hasSeenIntroduction && !textBox.active) {
+    textBox.open(["...", "where are we?", "should we try to find a way out?"]);
+    game.freeze();
+    textBox.onClose = () => {
+      hasSeenIntroduction = true;
+      game.unfreeze();
+    }
+  }
+
+  if (game.player.collisionCheck(game.myEndPoint) && !textBox.active) {
+    textBox.open(["you won the game!"]);
+    game.freeze();
+    level = "winning";
   }
 }
 
 function keyPressed() {
   if (keyCode === 32) {
-    game.player.jump();
+    if (textBox.active) {
+      textBox.messageIndex++;
+    } else {
+      game.player.jump();
+    }
   }
 }
 
@@ -59,9 +87,19 @@ function keyReleased() {
   }
 }
 
-restartBtn.onclick = () => {
-  message.innerText = "";
+function startGame() {
+  startGameButton.hide();
+  level = "level 1";
+}
+
+function restart() {
   game.player.spawn();
   game.monster.spawn();
+  game.unfreeze();
+  hasSeenIntroduction = false;
+  textBox.close();
+  level = "level 1";
+  restartButton.hide();
+  learnMoreLink.hide();
   loop();
-};
+}

@@ -1,4 +1,5 @@
 let WIDTH = 600;
+let HEIGHT = 400;
 
 let playerIdle;
 let playerIdleAnimation;
@@ -24,4 +25,10 @@ let monsterRunRightAnimation;
 let endPoint;
 let endPointAnimation;
 
-let bgImage;
+let startGameButton;
+
+let bgLevelOne;
+
+let restartButton;
+let learnMoreLink;
+

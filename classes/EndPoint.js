@@ -1,7 +1,7 @@
 class EndPoint {
   constructor() {
-    this.x = 530;
-    this.y = 385;
+    this.x = WIDTH - 100;
+    this.y = HEIGHT - 95;
     this.width = 64;
     this.height = 64;
   }

@@ -4,15 +4,27 @@ class Game {
     this.myBackground = new Background();
     this.myEndPoint = new EndPoint();
     this.monster = new Monster();
+    this.level = 1;
   }
 
   setup() {
     this.myBackground.setup();
   }
 
+  freeze() {
+    this.player.freeze();
+    this.monster.freeze();
+  }
+
+  unfreeze() {
+    this.player.unfreeze();
+    this.monster.unfreeze();
+  }
+
   draw() {
     this.myBackground.draw();
     this.myEndPoint.draw();
+
     this.player.draw();
 
     this.monster.draw();
