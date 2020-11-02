@@ -1,6 +1,6 @@
 class Player {
   constructor() {
-    this.x = 480;
+    this.x = 390;
     this.y = 130;
     this.width = 32;
     this.height = 32;
@@ -13,7 +13,7 @@ class Player {
   }
 
   spawn() {
-    this.x = 480;
+    this.x = 390;
     this.y = 130;
   }
 
@@ -35,12 +35,12 @@ class Player {
     }
   }
 
-  collisionCheck(obstacle) {
-    const isTouchingOnLeft = this.x + this.width >= obstacle.x;
-    const isTouchingOnRight = this.x <= obstacle.x + obstacle.width;
+  collisionCheck(monster) {
+    const isTouchingOnLeft = this.x + this.width - 3 >= monster.x;
+    const isTouchingOnRight = this.x <= monster.x + monster.width - 15;
 
-    const isTouchingOnTop = this.y + this.height >= obstacle.y;
-    const isTouchingOnBottom = this.y <= obstacle.y + obstacle.height;
+    const isTouchingOnTop = this.y + this.height >= monster.y;
+    const isTouchingOnBottom = this.y <= monster.y + monster.height;
 
     if (
       isTouchingOnLeft &&
@@ -96,7 +96,7 @@ class Player {
     return this.y < this.floor;
   }
 
-  draw() {
+  draw(level) {
     this.floor = this.findFloor();
 
     this.velocity += this.gravity;

@@ -38,15 +38,16 @@ class TextBox {
       }
 
       const msg = this.messages[this.messageIndex];
+      textSize(7);
 
-      let bbox = gameFont.textBounds(msg, WIDTH / 2, 40);
+      let bbox = gameFont.textBounds(msg, WIDTH/2, 40);
       fill(255);
       stroke(0);
       rect(bbox.x-10, bbox.y-10, bbox.w+20, bbox.h+20);
       fill(0);
       noStroke();
 
-      text(msg, WIDTH / 2, 40);
+      text(msg, WIDTH/2, 40);
       fill(0, 102, 153);
 
     }

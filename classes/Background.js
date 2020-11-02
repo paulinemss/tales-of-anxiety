@@ -9,6 +9,7 @@ class Background {
   }
 
   draw() {
+    image(bgGeneral, this.x, 0, this.width, this.height);
     image(bgLevelOne, this.x, 0, this.width, this.height);
   }
 }

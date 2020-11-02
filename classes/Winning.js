@@ -15,12 +15,12 @@ class Winning {
       learnMoreLink.show();
     }
    
-    if (!restartButton) {
-      restartButton = createButton('restart');
-      restartButton.position(WIDTH / 2, 400);
-      restartButton.mousePressed(restart);
+    if (!restartGameButton) {
+      restartGameButton = createButton('Restart Game');
+      restartGameButton.position(WIDTH / 2, 400);
+      restartGameButton.mousePressed(restartGame);
     } else {
-      restartButton.show();
+      restartGameButton.show();
     }
   }
 }
