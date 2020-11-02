@@ -35,9 +35,11 @@ let torchOffAnimation;
 // BACKGROUNDS // 
 
 let bgGeneral; 
+let bgIntro; 
 let bgLevelOne;
 let bgLevelOneDark1; 
 let bgLevelOneDark2; 
+let bgConclusion;
 
 // BUTTONS AND LINKS // 
 

@@ -1,16 +1,22 @@
 class Loosing {
-  draw() {
-    background("black");
+  setup() {
+    this.width = WIDTH;
+    this.height = HEIGHT;
+  }
 
-    animation(monsterRunRightAnimation, WIDTH/2, 100);
+  draw() {
+    image(bgIntro, 0, 0, this.width, this.height);
+
+    animation(monsterRunRightAnimation, WIDTH / 2, 130);
 
     fill(255, 255, 255);
-    textSize(10);
-    text("Game over!", WIDTH / 2, 150);
+    textSize(24);
+    text("GAME OVER", WIDTH / 2, HEIGHT / 2);
 
     if (!restartLevelButton) {
       restartLevelButton = createButton('Restart Level');
-      restartLevelButton.position(WIDTH / 2, 450);
+      restartLevelButton.addClass('restartLevelButton');
+      restartLevelButton.addClass('allButtons');
       restartLevelButton.mousePressed(restartLevel);
     } else {
       restartLevelButton.show();
@@ -18,7 +24,8 @@ class Loosing {
    
     if (!restartGameButton) {
       restartGameButton = createButton('Restart Game');
-      restartGameButton.position(WIDTH / 2, 400);
+      restartGameButton.addClass('restartGameButton');
+      restartGameButton.addClass('allButtons');
       restartGameButton.mousePressed(restartGame);
     } else {
       restartGameButton.show();

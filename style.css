@@ -3,9 +3,48 @@ body {
   flex-direction: column;
   align-items: center;
   font-family: 'Press Start 2P';
+  background-color: seashell;
 }
 
 .p5Canvas {
+  margin-top: 20px;
   width: 900px !important;
   height: 600px !important;
+}
+
+.allButtons {
+  background-color: white;
+  border: none; 
+  position: absolute;
+  z-index: 1;
+  font-family: "Press Start 2P";
+  padding: 10px;
+  font-size: 12px; 
+  cursor: pointer;
+}
+
+.startGameButton {
+  top: 470px;
+}
+
+.restartLevelButton {
+  top: 400px;
+}
+
+.restartGameButton {
+  top: 470px; 
+}
+
+.lastRestartGame {
+  top: 470px;
+  border: 2px solid black;
+}
+
+.learnMoreLink {
+  position: absolute;
+  width: 400px;
+  color: black;
+  top: 370px; 
+  text-align: center;
+  line-height: 1.6;
 }

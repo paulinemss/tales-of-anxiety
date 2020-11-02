@@ -15,8 +15,11 @@ class Monster {
       "You should work\n instead of playing a\n game on your browser",
       "The t-shirt you're\n wearing is probably\n unethically produced",
       "Did you remember\n returning that book\n from the library?",
+      'The way you said "hello"\n to your boss sounded\n super weird today.',
       "Probably some people\n somewhere are making\n fun of you right now",
-      "Do you remember that\n awkward thing you said\n in high school?"
+      "Do you remember that\n awkward thing you said\n in high school?",
+      "There's probably a\n super important task that\n you have forgotten",
+      "For sure, nobody\n likes you at work.\n They think you're weird."
     ]; 
   }
 
@@ -27,11 +30,17 @@ class Monster {
 
   freeze() {
     this.isFrozen = true;
+    this.msg = '';
   }
   
   unfreeze() {
     this.isFrozen = false;
+  }
+
+  reset() {
+    clearInterval(this.speechTimeout);
     this.speechTimeout = null;
+    this.msg = '';
     this.msgIndex = 0;
   }
 
@@ -77,15 +86,15 @@ class Monster {
     }
   }
 
-  draw(level) {
+  draw(subLevel) {
     if (this.direction === "left") {
       animation(monsterRunLeftAnimation, this.x, this.y);
     } else if (this.direction === "right") {
       animation(monsterRunRightAnimation, this.x, this.y);
     }
 
-    if (!this.speechTimeout && level === 3) { 
-      this.msg = this.speak();
+    if (!this.speechTimeout && subLevel === 3) { 
+      console.log("subLevel", subLevel);
       this.speechTimeout = setInterval(() => {
         if (this.msg === '') {
           this.msg = this.speak(); 
@@ -95,16 +104,19 @@ class Monster {
       }, 3000); 
     }
    
-    textSize(6);
-    let msgBox = gameFont.textBounds(this.msg, this.x, this.y - 40);
-    fill(255);
-    stroke(0);
-    rect(msgBox.x-5, msgBox.y-5, msgBox.w+10, msgBox.h+10);
-    fill(0);
-    noStroke();
+    if (this.msg && subLevel === 3) {
+      let xPosition = this.x; 
+      if (xPosition < 150) { xPosition = 150; }
+      textSize(6);
+      let msgBox = gameFont.textBounds(this.msg, xPosition, this.y - 40);
+      fill(255);
+      stroke(0);
+      rect(msgBox.x-5, msgBox.y-5, msgBox.w+10, msgBox.h+10);
+      fill(0);
+      noStroke();
 
-    text(this.msg, this.x, this.y - 40);
-    fill(0, 102, 153); 
-    
+      text(this.msg, xPosition, this.y - 40);
+      fill(0, 102, 153); 
+    } 
   }
 }

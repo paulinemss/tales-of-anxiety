@@ -13,9 +13,11 @@ function preload() {
 
   // loading images, fonts 
   bgGeneral = loadImage("/assets/terrain/Background.png");
+  bgIntro = loadImage("/assets/terrain/Intro.png");
   bgLevelOne = loadImage("/assets/terrain/Level1.png");
   bgLevelOneDark1 = loadImage("/assets/terrain/Dark-Level1-1.png");
   bgLevelOneDark2 = loadImage("/assets/terrain/Dark-Level1-2.png");
+  bgConclusion = loadImage("/assets/terrain/Conclusion.png");
   gameFont = loadFont("/assets/font/PressStart2P-Regular.ttf")
 
   // loading animations 
@@ -43,11 +45,13 @@ let level = "beginning";
 function setup() {
   createCanvas(WIDTH, HEIGHT);
   game.setup();
+  intro.setup();
+  loosing.setup();
+  winning.setup();
 }
 
 function draw() {
   clear();
-  background("snow");
 
   // checking the current level to display 
   if (level === "beginning") {
@@ -97,9 +101,7 @@ function startGame() {
 function restartLevel() {
   game.player.spawn();
   game.monster.spawn();
-  game.unfreeze();
-  game.hasSeenIntroduction = false;
-  game.textBox.close();
+  game.reset();
   level = "level 1";
   if (restartGameButton) { restartGameButton.hide(); }
   if (restartLevelButton) { restartLevelButton.hide(); }
@@ -108,10 +110,8 @@ function restartLevel() {
 function restartGame() {
   game.player.spawn();
   game.monster.spawn();
-  game.unfreeze();
-  game.hasSeenIntroduction = false;
-  game.textBox.close();
-  level = "level 1";
+  game.reset();
+  level = "beginning";
   if (restartGameButton) { restartGameButton.hide(); }
   if (restartLevelButton) { restartLevelButton.hide(); }
   if (learnMoreLink) { learnMoreLink.hide(); }

@@ -1,23 +1,33 @@
 class Winning {
+  setup() {
+    this.width = WIDTH;
+    this.height = HEIGHT;
+  }
+
   draw() {
-    background("lightsalmon");
+    image(bgConclusion, 0, 0, this.width, this.height);
 
     animation(playerIdleAnimation, WIDTH/2, 100);
 
-    fill(255, 255, 255);
-    textSize(10);
-    text("You are so much more than what is making you anxious.", WIDTH / 2, 150);
+    fill(0, 0, 0);
+    textSize(14);
+    text("YOU WON", WIDTH / 2, 150);
+
+    fill(0, 0, 0);
+    textSize(12);
+    text("You are so much more\n than what is making\n you anxious.", WIDTH / 2, 180);
 
     if (!learnMoreLink) {
-      learnMoreLink = createA('http://p5js.org/', 'Find resources to learn to confront your anxiety here.', '_blank');
-      learnMoreLink.position(WIDTH / 2, 250);
+      learnMoreLink = createA('https://www.mind.org.uk/information-support/types-of-mental-health-problems/anxiety-and-panic-attacks/self-care-for-anxiety/', 'Learn how to cope with the anxiety monster here.', '_blank');
+      learnMoreLink.addClass("learnMoreLink");
     } else {
       learnMoreLink.show();
     }
    
     if (!restartGameButton) {
       restartGameButton = createButton('Restart Game');
-      restartGameButton.position(WIDTH / 2, 400);
+      restartGameButton.addClass("lastRestartGame");
+      restartGameButton.addClass("allButtons");
       restartGameButton.mousePressed(restartGame);
     } else {
       restartGameButton.show();

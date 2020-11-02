@@ -15,7 +15,7 @@ class Darkness {
       height: 32,
       state: 'off'
     };
-    this.level = 1;
+    this.subLevel = 1;
   }
 
   setup() {
@@ -24,6 +24,7 @@ class Darkness {
   }
 
   reset() {
+    this.subLevel = 1; 
     this.torch1.state = 'off';
     this.torch2.state = 'off';
   }
@@ -42,28 +43,29 @@ class Darkness {
       isTouchingOnBottom
     ) {
       torch.state = "on";
+      torchOnAnimation.frameDelay = 8;
     } 
   }
 
   draw() {
-    if (this.level === 1) {
+    if (this.subLevel === 1) {
       animation(torchOffAnimation, this.torch1.x, this.torch1.y);
       image(bgLevelOneDark1, this.x, 0, this.width, this.height);
-    } else if (this.level === 2) {
+    } else if (this.subLevel === 2) {
       animation(torchOnAnimation, this.torch1.x, this.torch1.y);
       animation(torchOffAnimation, this.torch2.x, this.torch2.y);
       image(bgLevelOneDark2, this.x, 0, this.width, this.height);
-    } else if (this.level === 3) {
+    } else if (this.subLevel === 3) {
       animation(torchOnAnimation, this.torch1.x, this.torch1.y);
       animation(torchOnAnimation, this.torch2.x, this.torch2.y);
     }
 
     if (this.torch1.state === "off") { 
-      this.level = 1; 
+      this.subLevel = 1; 
     } else if (this.torch1.state === "on" && this.torch2.state === "off") {
-      this.level = 2;
+      this.subLevel = 2;
     } else if (this.torch1.state === "on" && this.torch2.state === "on") {
-      this.level = 3; 
+      this.subLevel = 3; 
     }
   }
 }
