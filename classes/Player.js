@@ -1,20 +1,20 @@
 class Player {
-  constructor() {
-    this.x = 390;
-    this.y = 130;
+  constructor(x, y, floor) {
+    this.x = x;
+    this.y = y;
     this.width = 32;
     this.height = 32;
     this.gravity = 0.2;
     this.velocity = 0;
-    this.floor = HEIGHT - 78;
+    this.floor = floor;
     this.jumpCounts = 0;
     this.movement = "idle";
     this.isFrozen = false;
   }
 
-  spawn() {
-    this.x = 390;
-    this.y = 130;
+  spawn(x, y) {
+    this.x = x;
+    this.y = y;
   }
 
   freeze() {
@@ -25,13 +25,29 @@ class Player {
     this.isFrozen = false;
   }
 
-  findFloor() {
-    if (this.velocity >= 0 && this.y < 250 && this.x < 240) {
-      return HEIGHT - 206;
-    } else if (this.y < 140 && this.x > 355) {
-      return HEIGHT - 270;
-    } else {
-      return HEIGHT - 78;
+  findFloor(level) {
+    if (level === "level 1") {
+      if (this.velocity >= 0 && this.y < 250 && this.x < 240) {
+        return 194;
+      } else if (this.y < 140 && this.x > 355) {
+        return 130;
+      } else {
+        return 322;
+      }
+    } else if (level === "level 2") {
+      if (this.y < 230 && this.x < 160) {
+        return 226;
+      } else if (this.y > 230 && this.x < 200 && this.x > 110) {
+        return 322; 
+      } else if (this.y < 216 && this.x > 235 && this.x < 285)  {
+        return 210;
+      } else if (this.y < 180 && this.x > 330 && this.x < 375) {
+        return 176; 
+      } else if (this.y < 150 && this.x > 440) {
+        return 145;
+      } else if (this.y < 310 && this.x > 395 && this.x < 475) {
+        return 305;
+      } 
     }
   }
 
@@ -81,6 +97,7 @@ class Player {
   }
 
   jump() {
+    console.log("jump");
     if (this.isFrozen) return;
 
     if (this.jumpCounts === 2) {
@@ -97,7 +114,7 @@ class Player {
   }
 
   draw(level) {
-    this.floor = this.findFloor();
+    this.floor = this.findFloor(level);
 
     this.velocity += this.gravity;
     this.y += this.velocity;

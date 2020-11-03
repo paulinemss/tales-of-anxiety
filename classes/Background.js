@@ -1,6 +1,8 @@
 class Background {
   constructor() {
     this.x = 0;
+    this.width = WIDTH;
+    this.height = HEIGHT;
   }
 
   setup() {
@@ -8,8 +10,12 @@ class Background {
     this.height = HEIGHT;
   }
 
-  draw() {
+  draw(level) {
     image(bgGeneral, this.x, 0, this.width, this.height);
-    image(bgLevelOne, this.x, 0, this.width, this.height);
+    if (level === "level 1") {
+      image(bgLevelOne, this.x, 0, this.width, this.height);
+    } else if (level === "level 2") {
+      image(bgLevelTwo, this.x, 0, this.width, this.height);
+    }
   }
 }

@@ -17,6 +17,7 @@ function preload() {
   bgLevelOne = loadImage("/assets/terrain/Level1.png");
   bgLevelOneDark1 = loadImage("/assets/terrain/Dark-Level1-1.png");
   bgLevelOneDark2 = loadImage("/assets/terrain/Dark-Level1-2.png");
+  bgLevelTwo = loadImage("/assets/terrain/Level2.png");
   bgConclusion = loadImage("/assets/terrain/Conclusion.png");
   gameFont = loadFont("/assets/font/PressStart2P-Regular.ttf")
 
@@ -35,16 +36,18 @@ function preload() {
 
 // initializing classes 
 const intro = new Intro();
-const game = new Game();
+let levelOne = new LevelOne();
+const levelTwo = new LevelTwo();
 const winning = new Winning();
 const loosing = new Loosing(); 
 
 // initializing the level
-let level = "beginning";
+let level = "level 1";
+let wonLevelOne = false; 
 
 function setup() {
   createCanvas(WIDTH, HEIGHT);
-  game.setup();
+  levelOne.setup();
   intro.setup();
   loosing.setup();
   winning.setup();
@@ -52,44 +55,65 @@ function setup() {
 
 function draw() {
   clear();
-
+  console.log(levelTwo.player.x);
+  console.log(levelTwo.player.y);
   // checking the current level to display 
   if (level === "beginning") {
     intro.draw();
   } else if (level === "level 1") {
-    game.draw();
+    levelOne.draw();
+  } else if (level === "level 2") {
+    levelTwo.draw(); 
   } else if (level === "winning") {
     winning.draw();
   } else if (level === "loosing") {
-     loosing.draw();
+    loosing.draw();
   }
 
-  // if the player touches the monster and looses 
-  if (game.player.collisionCheck(game.monster)) {
-    game.freeze();
+  // LEVEL 1 if the player touches the monster and looses
+  if (levelOne && levelOne.player.collisionCheck(levelOne.monster)) {
+    levelOne.freeze();
     level = "loosing";
   }
 
-  // if the player touches the end point and wins
-  if (game.myEndPoint.collisionCheck(game.player)) {
-    game.freeze();
+  // LEVEL 2 if the player touches the monster or falls down and looses
+  if (levelTwo.player.collisionCheck(levelTwo.monster) || levelTwo.player.y > 380) {
+    levelTwo.freeze();
+    level = "loosing";
+  }
+
+  // LEVEL 1 if the player touches the end point and wins
+  if (levelOne && levelOne.myEndPoint.collisionCheck(levelOne.player)) {
+    levelOne.freeze();
+    level = "level 2";
+    levelOne = null;
+    wonLevelOne = true; 
+  }
+
+  // LEVEL 2 if the player touches the end point and wins 
+  if (levelTwo.myEndPoint.collisionCheck(levelTwo.player)) {
+    levelTwo.freeze();
     level = "winning";
   }
 }
 
 function keyPressed() {
   if (keyCode === 32) {
-    if (game.textBox.active) {
-      game.textBox.messageIndex++;
+    if (levelOne && levelOne.textBox.active) {
+      levelOne.textBox.messageIndex++;
+    } else if (levelTwo.textBox.active) {
+      levelTwo.textBox.messageIndex++;
     } else {
-      game.player.jump();
+      levelOne && levelOne.player.jump();
+      levelTwo.player.jump();   
     }
   }
 }
 
 function keyReleased() {
   if (keyCode === 39 || keyCode === 37) {
-    game.player.reset();
+    levelOne && levelOne.player.reset();
+    levelTwo.player.reset();
   }
 }
 
@@ -99,19 +123,22 @@ function startGame() {
 }
 
 function restartLevel() {
-  game.player.spawn();
-  game.monster.spawn();
-  game.reset();
-  level = "level 1";
+  levelOne.reset();
+  levelTwo.reset();
+  if (wonLevelOne) {
+    level = "level 2"; 
+  } else {
+    level = "level 1";
+  }
   if (restartGameButton) { restartGameButton.hide(); }
   if (restartLevelButton) { restartLevelButton.hide(); }
 }
 
 function restartGame() {
-  game.player.spawn();
-  game.monster.spawn();
-  game.reset();
+  levelOne.reset();
+  levelTwo.reset();
   level = "beginning";
+  wonLevelOne = false;
   if (restartGameButton) { restartGameButton.hide(); }
   if (restartLevelButton) { restartLevelButton.hide(); }
   if (learnMoreLink) { learnMoreLink.hide(); }

@@ -1,16 +1,15 @@
-class Game {
+class LevelOne {
   constructor() {
-    this.player = new Player();
+    this.player = new Player(390, 130, 322);
     this.myBackground = new Background();
     this.myEndPoint = new EndPoint();
-    this.monster = new Monster();
+    this.monster = new Monster(400, 322);
     this.darkness = new Darkness();
     this.textBox = new TextBox();
     this.userMessages = 0; 
     this.firstMsg = false; 
     this.secondMsg = false; 
     this.thirdMsg = false; 
-    this.fourthMsg = false; 
     this.level = 1;
   }
 
@@ -33,29 +32,30 @@ class Game {
   reset() {
     this.player.unfreeze();
     this.monster.unfreeze();
+    this.player.spawn(390, 130);
+    this.monster.spawn(400, 322);
     this.monster.reset();
     this.darkness.reset();
     this.firstMsg = false; 
     this.secondMsg = false; 
     this.thirdMsg = false; 
-    this.fourthMsg = false; 
     this.textBox.close();
   }
 
   draw() {
-    this.myBackground.draw();
-    this.myEndPoint.draw();
+    this.myBackground.draw("level 1");
+    this.myEndPoint.draw(500, 305);
 
-    this.player.draw(this.darkness.subLevel);
+    this.player.draw("level 1");
 
     this.monster.draw(this.darkness.subLevel);
-    this.monster.move(this.player);
+    this.monster.move(this.player, 80, 450);
 
     this.darkness.draw();
     this.darkness.collisionCheck(this.darkness.torch1, this.player);
     this.darkness.collisionCheck(this.darkness.torch2, this.player);
 
-    this.textBox.draw();
+    this.textBox.draw(this.player, this.monster);
 
     if (!this.firstMsg && !this.textBox.active) {
       this.textBox.open(
@@ -81,24 +81,13 @@ class Game {
 
     if (this.darkness.subLevel === 3 && !this.thirdMsg && !this.textBox.active) {
       this.textBox.open(
-        ["what is this monster?"]
+        ["what is this monster?", "monster: you should work\n instead of playing a\n game in your browser", "that's a bit harsh!", "let's run away from it"]
       );
       this.freeze();
       this.textBox.onClose = () => {
         this.thirdMsg = true; 
         this.unfreeze();
       }
-
-      setTimeout(() => {
-        this.textBox.open(
-          ["that's a bit harsh!", "let's run away from it"]
-        );
-        this.freeze();
-        this.textBox.onClose = () => {
-          this.userMessages === 3; 
-          this.unfreeze();
-        }
-      }, 6000);
     }
     
     if (keyIsDown(39)) {

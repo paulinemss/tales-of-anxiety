@@ -1,7 +1,7 @@
 class EndPoint {
   constructor() {
-    this.x = WIDTH - 100;
-    this.y = HEIGHT - 95;
+    this.x = 0;
+    this.y = 0;
     this.width = 64;
     this.height = 64;
   }
@@ -25,7 +25,9 @@ class EndPoint {
     }
   }
 
-  draw() {
-    animation(endPointAnimation, this.x, this.y);
+  draw(x, y) {
+    this.x = x;
+    this.y = y; 
+    animation(endPointAnimation, x, y);
   }
 }
