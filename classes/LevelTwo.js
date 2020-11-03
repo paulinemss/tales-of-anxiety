@@ -6,6 +6,9 @@ class LevelTwo {
     this.player = new Player(100, 226, 226);
     this.firstMsg = false; 
     this.textBox = new TextBox();
+    this.platform1 = new Platform(200, 208, 1);
+    this.platform2 = new Platform(331, 176, 1);
+    this.spike = new Spikes(270, 180, 1.5);
   }
 
   setup() {
@@ -34,6 +37,10 @@ class LevelTwo {
   draw() {
     this.myBackground.draw("level 2");
     this.myEndPoint.draw(480, 129);
+
+    this.platform1.draw();
+    this.platform2.draw();
+    this.spike.draw();
 
     if (!this.firstMsg) {
       this.monster.draw();

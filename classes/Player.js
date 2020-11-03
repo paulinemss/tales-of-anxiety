@@ -39,7 +39,7 @@ class Player {
         return 226;
       } else if (this.y > 230 && this.x < 200 && this.x > 110) {
         return 322; 
-      } else if (this.y < 216 && this.x > 235 && this.x < 285)  {
+      } else if (this.y < 216 && this.x > 200 && this.x < 250)  {
         return 210;
       } else if (this.y < 180 && this.x > 330 && this.x < 375) {
         return 176; 
@@ -97,7 +97,6 @@ class Player {
   }
 
   jump() {
-    console.log("jump");
     if (this.isFrozen) return;
 
     if (this.jumpCounts === 2) {
@@ -113,7 +112,12 @@ class Player {
     return this.y < this.floor;
   }
 
-  draw(level) {
+  die() {
+    this.movement = "dying";
+    this.y++; 
+  }
+
+  draw(level) {    
     this.floor = this.findFloor(level);
 
     this.velocity += this.gravity;
@@ -140,6 +144,8 @@ class Player {
       } else {
         animation(playerDblJumpAnimation, this.x, this.y);
       }
+    } else if (this.movement === "dying") {
+      image(playerFall, this.x, this.y, this.width, this.height);
     }
 
     if (this.y === this.floor && this.movement === "jumping") {

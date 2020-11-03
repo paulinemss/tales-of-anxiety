@@ -60,9 +60,9 @@ class Monster {
       this.speed = 1; 
       monsterRunLeftAnimation.frameDelay = 4;
       monsterRunRightAnimation.frameDelay = 4; 
-      if (this.x === leftBorder) {
+      if (this.x <= leftBorder) {
         this.direction = "right";
-      } else if (this.x === rightBorder) {
+      } else if (this.x >= rightBorder) {
         this.direction = "left";
       }
     } else {

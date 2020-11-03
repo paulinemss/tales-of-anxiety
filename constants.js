@@ -15,6 +15,7 @@ let playerJump;
 let playerJumpAnimation;
 let playerDblJump;
 let playerDblJumpAnimation;
+let playerFall; 
 
 // MONSTER ANIMATIONS //
 
@@ -31,6 +32,8 @@ let torchOn;
 let torchOnAnimation;
 let torchOff;
 let torchOffAnimation;
+let platform; 
+let spikeBall; 
 
 // BACKGROUNDS // 
 
