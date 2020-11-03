@@ -52,3 +52,17 @@ let restartLevelButton;
 let restartGameButton;
 let learnMoreLink;
 
+// ANXIETY THOUGHTS //
+
+let msgIndex = 0;
+let anxietyThoughts = [
+  "For sure, nobody\n likes you at work.\n They think you're weird.",
+  "You haven't called\n your parents in\n at least a week",
+  "The t-shirt you're\n wearing is probably\n unethically produced",
+  "Did you remember\n returning that book\n from the library?",
+  'The way you said "hello"\n to your boss sounded\n super weird today.',
+  "Probably some people\n somewhere are making\n fun of you right now",
+  "Do you remember that\n awkward thing you said\n in high school?",
+  "There's probably a\n super important task that\n you have forgotten"
+]; 
+

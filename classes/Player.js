@@ -10,11 +10,13 @@ class Player {
     this.jumpCounts = 0;
     this.movement = "idle";
     this.isFrozen = false;
+    this.isOnPlatform = false; 
   }
 
   spawn(x, y) {
     this.x = x;
     this.y = y;
+    this.movement = "idle";
   }
 
   freeze() {
@@ -49,6 +51,15 @@ class Player {
         return 305;
       } 
     }
+  }
+  
+  usePlatform(platform) {
+    this.isOnPlatform = true; 
+    this.floor = platform.y; 
+  }
+
+  leavePlatform () {
+    this.isOnPlatform = false;
   }
 
   collisionCheck(monster) {
@@ -103,33 +114,38 @@ class Player {
       return;
     }
     this.y -= 5;
-    this.velocity -= 5;
+    this.velocity -= 4;
+    this.velocity = Math.max(this.velocity, -5);
     this.jumpCounts++;
     this.movement = "jumping";
   }
 
   isInTheAir() {
-    return this.y < this.floor;
+    return this.y < this.floor || !this.floor;
   }
 
   die() {
     this.movement = "dying";
-    this.y++; 
   }
 
-  draw(level) {    
-    this.floor = this.findFloor(level);
+  draw(level) {
+    if (this.movement !== "dying") {
+      if (!this.isOnPlatform) {
+        this.floor = this.findFloor(level);
+      }
 
-    this.velocity += this.gravity;
-    this.y += this.velocity;
-
-    if (this.y > this.floor) {
-      this.y = this.floor;
-      this.velocity = 0;
-      this.jumpCounts = 0;
-    } else if (this.y <= 0) {
-      this.y = 0;
-      this.velocity = 1;
+      this.velocity += this.gravity;
+      this.y += this.velocity;
+      
+      // adding 5 as threshold so we dont bounce on moving platforms
+      if (this.y > this.floor - 5) {
+        this.y = this.floor;
+        this.velocity = 0;
+        this.jumpCounts = 0;
+      } else if (this.y <= 0) {
+        this.y = 0;
+        this.velocity = 1;
+      }
     }
 
     if (this.movement === "idle") {
@@ -146,6 +162,7 @@ class Player {
       }
     } else if (this.movement === "dying") {
       image(playerFall, this.x, this.y, this.width, this.height);
+      this.y++;
     }
 
     if (this.y === this.floor && this.movement === "jumping") {

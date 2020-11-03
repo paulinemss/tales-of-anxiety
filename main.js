@@ -74,10 +74,12 @@ function draw() {
 
   // LEVEL 1 if the player touches the monster and looses
   if (levelOne.player.collisionCheck(levelOne.monster)) {
+    levelOne.monster.freeze();
     levelOne.player.die();
-    if (levelOne.player.y > HEIGHT) {
-      level = "loosing";
-    }
+  }
+
+  if (levelOne.player.y > HEIGHT) {
+    level = "loosing";
   }
 
   // LEVEL 2 if the player touches the monster or falls down and looses
@@ -97,7 +99,7 @@ function draw() {
   }
 
   // LEVEL 1 if the player touches the end point and wins
-  if (levelOne.myEndPoint.collisionCheck(levelOne.player)) {
+  if (levelOne.myEndPoint.collisionCheck(levelOne.player) && level === "level 1") {
     levelOne.freeze();
     level = "level 2";
     wonLevelOne = true; 

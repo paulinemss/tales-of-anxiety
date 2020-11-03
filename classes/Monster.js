@@ -9,17 +9,6 @@ class Monster {
     this.speed = 1; 
     this.speechTimeout = null;
     this.msg = ''; 
-    this.msgIndex = 0;
-    this.anxietyThoughts = [
-      "For sure, nobody\n likes you at work.\n They think you're weird.",
-      "You haven't called\n your parents in\n at least a week",
-      "The t-shirt you're\n wearing is probably\n unethically produced",
-      "Did you remember\n returning that book\n from the library?",
-      'The way you said "hello"\n to your boss sounded\n super weird today.',
-      "Probably some people\n somewhere are making\n fun of you right now",
-      "Do you remember that\n awkward thing you said\n in high school?",
-      "There's probably a\n super important task that\n you have forgotten"
-    ]; 
   }
 
   spawn(x, y) {
@@ -40,16 +29,16 @@ class Monster {
     clearInterval(this.speechTimeout);
     this.speechTimeout = null;
     this.msg = '';
-    this.msgIndex = 0;
+    msgIndex = 0;
   }
 
   speak() {
     let msg; 
-    this.msgIndex++; 
-    if (this.msgIndex > this.anxietyThoughts.length) {
-      this.msgIndex = 0;
+    msgIndex++; 
+    if (msgIndex > anxietyThoughts.length) {
+      msgIndex = 0;
     }
-    msg = this.anxietyThoughts[this.msgIndex]; 
+    msg = anxietyThoughts[msgIndex]; 
     return msg; 
   }
 
