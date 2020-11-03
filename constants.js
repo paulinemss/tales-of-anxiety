@@ -16,6 +16,7 @@ let playerJumpAnimation;
 let playerDblJump;
 let playerDblJumpAnimation;
 let playerFall; 
+let playerFallAnimation;
 
 // MONSTER ANIMATIONS //
 

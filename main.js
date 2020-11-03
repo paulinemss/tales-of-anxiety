@@ -10,6 +10,7 @@ function preload() {
   endPoint = loadSpriteSheet("/assets/terrain/endPoint.png", 64, 64, 17);
   torchOn = loadSpriteSheet("/assets/terrain/torchOn.png", 16, 32, 3);
   torchOff = loadSpriteSheet("/assets/terrain/torchOff.png", 16, 32, 1);
+  playerFall = loadSpriteSheet("/assets/player/fall.png", 32, 32, 1);
 
   // loading images, fonts 
   bgGeneral = loadImage("/assets/terrain/Background.png");
@@ -21,7 +22,6 @@ function preload() {
   bgConclusion = loadImage("/assets/terrain/Conclusion.png");
   platform = loadImage("/assets/terrain/platform.png");
   spikeBall = loadImage("/assets/terrain/spikeBall.png");
-  playerFall = loadImage("/assets/player/fall.png");
   gameFont = loadFont("/assets/font/PressStart2P-Regular.ttf")
 
   // loading animations 
@@ -35,6 +35,7 @@ function preload() {
   endPointAnimation = loadAnimation(endPoint);
   torchOnAnimation = loadAnimation(torchOn);
   torchOffAnimation = loadAnimation(torchOff);
+  playerFallAnimation = loadAnimation(playerFall);
 }
 
 // initializing classes 
@@ -45,7 +46,7 @@ const winning = new Winning();
 const loosing = new Loosing(); 
 
 // initializing the level
-let level = "beginning";
+let level = "level 1";
 let wonLevelOne = false; 
 
 function setup() {

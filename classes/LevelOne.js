@@ -90,10 +90,12 @@ class LevelOne {
       }
     }
     
-    if (keyIsDown(39)) {
-      this.player.moveRight();
-    } else if (keyIsDown(37)) {
-      this.player.moveLeft();
-    }
+    if (this.player.movement !== "dying") {
+      if (keyIsDown(39)) {
+        this.player.moveRight();
+      } else if (keyIsDown(37)) {
+        this.player.moveLeft();
+      }
+    }    
   }
 }

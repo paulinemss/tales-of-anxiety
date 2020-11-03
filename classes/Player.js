@@ -82,7 +82,9 @@ class Player {
   }
 
   reset() {
-    this.movement = "idle";
+    if (this.movement !== "dying") {
+      this.movement = "idle";
+    }
   }
 
   moveRight() {
@@ -129,6 +131,7 @@ class Player {
   }
 
   draw(level) {
+    console.log(this.movement);
     if (this.movement !== "dying") {
       if (!this.isOnPlatform) {
         this.floor = this.findFloor(level);
@@ -150,6 +153,9 @@ class Player {
 
     if (this.movement === "idle") {
       animation(playerIdleAnimation, this.x, this.y);
+    } else if (this.movement === "dying") {
+      animation(playerFallAnimation, this.x, this.y);
+      this.y += 2;
     } else if (this.movement === "moveRight" && !this.isInTheAir()) {
       animation(playerRunRightAnimation, this.x, this.y);
     } else if (this.movement === "moveLeft" && !this.isInTheAir()) {
@@ -160,9 +166,6 @@ class Player {
       } else {
         animation(playerDblJumpAnimation, this.x, this.y);
       }
-    } else if (this.movement === "dying") {
-      image(playerFall, this.x, this.y, this.width, this.height);
-      this.y++;
     }
 
     if (this.y === this.floor && this.movement === "jumping") {
