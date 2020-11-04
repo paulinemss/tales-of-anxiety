@@ -62,7 +62,7 @@ class LevelThree {
     } else if (this.firstMsg && !this.winningMsg) { 
       this.monster1.draw(3);
       this.monster2.draw(3);
-      this.monster1.move(this.player, 70, 420);
+      this.monster1.move(this.player, 80, 420);
       this.monster2.move(this.player, 160, WIDTH - 80);
     } else if (this.winningMsg) {
       this.changedMonster1.changePosition(this.monster1.x, this.monster1.y);
