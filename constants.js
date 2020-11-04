@@ -44,6 +44,7 @@ let bgLevelOne;
 let bgLevelOneDark1; 
 let bgLevelOneDark2; 
 let bgLevelTwo; 
+let bgLevelThree; 
 let bgConclusion;
 
 // BUTTONS AND LINKS // 

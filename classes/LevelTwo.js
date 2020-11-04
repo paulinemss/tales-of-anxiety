@@ -3,7 +3,7 @@ class LevelTwo {
     this.myBackground = new Background();
     this.myEndPoint = new EndPoint();
     this.monster = new Monster(374, 370);
-    this.player = new Player(100, 226, 226);
+    this.player = new Player(100, 226, 226, "level 2");
     this.firstMsg = false; 
     this.textBox = new TextBox();
     this.platform1 = new Platform(200, 208, 1);
@@ -53,7 +53,7 @@ class LevelTwo {
     }
     
     this.monster.move(this.player, 220, 370);
-    this.player.draw("level 2");
+    this.player.draw();
 
     this.textBox.draw(this.player, this.monster);
 
@@ -67,7 +67,7 @@ class LevelTwo {
 
     if (!this.firstMsg && !this.textBox.active) {
       this.textBox.open(
-        ["it was close!", "there's another anxiety monster here!"]
+        ["it was close!", "there's another anxiety\n monster here!"]
       );
       this.freeze();
       this.textBox.onClose = () => {

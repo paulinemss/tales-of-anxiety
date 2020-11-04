@@ -16,6 +16,8 @@ class Background {
       image(bgLevelOne, this.x, 0, this.width, this.height);
     } else if (level === "level 2") {
       image(bgLevelTwo, this.x, 0, this.width, this.height);
+    } else if (level === "level 3") {
+      image(bgLevelThree, this.x, 0, this.width, this.height);
     }
   }
 }

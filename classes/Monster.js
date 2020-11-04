@@ -45,7 +45,7 @@ class Monster {
   move(player, leftBorder, rightBorder) {
     if (this.isFrozen) return;
 
-    if (player.y < this.y) {
+    if (player.y < this.y - 10 || player.y > this.y + 10) {
       this.speed = 1; 
       monsterRunLeftAnimation.frameDelay = 4;
       monsterRunRightAnimation.frameDelay = 4; 
@@ -72,7 +72,7 @@ class Monster {
     }
   }
 
-  draw(subLevel) {    
+  draw(subLevel) {
     if (this.direction === "left") {
       animation(monsterRunLeftAnimation, this.x, this.y);
     } else if (this.direction === "right") {

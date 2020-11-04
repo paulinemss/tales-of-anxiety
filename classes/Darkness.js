@@ -15,12 +15,14 @@ class Darkness {
       height: 32,
       state: 'off'
     };
+    this.animation = null;
     this.subLevel = 1;
   }
 
   setup() {
     this.width = WIDTH;
     this.height = HEIGHT;
+    this.animation = torchOnAnimation.clone();
   }
 
   reset() {
@@ -43,7 +45,7 @@ class Darkness {
       isTouchingOnBottom
     ) {
       torch.state = "on";
-      torchOnAnimation.frameDelay = 8;
+      //torchOnAnimation.frameDelay = 8;
     } 
   }
 
@@ -52,12 +54,12 @@ class Darkness {
       animation(torchOffAnimation, this.torch1.x, this.torch1.y);
       image(bgLevelOneDark1, this.x, 0, this.width, this.height);
     } else if (this.subLevel === 2) {
-      animation(torchOnAnimation, this.torch1.x, this.torch1.y);
+      animation(this.animation, this.torch1.x, this.torch1.y);
       animation(torchOffAnimation, this.torch2.x, this.torch2.y);
       image(bgLevelOneDark2, this.x, 0, this.width, this.height);
     } else if (this.subLevel === 3) {
       animation(torchOnAnimation, this.torch1.x, this.torch1.y);
-      animation(torchOnAnimation, this.torch2.x, this.torch2.y);
+      animation(this.animation, this.torch2.x, this.torch2.y);
     }
 
     if (this.torch1.state === "off") { 

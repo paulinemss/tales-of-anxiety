@@ -1,6 +1,6 @@
 class LevelOne {
   constructor() {
-    this.player = new Player(390, 130, 322);
+    this.player = new Player(390, 130, 322, "level 1");
     this.myBackground = new Background();
     this.myEndPoint = new EndPoint();
     this.monster = new Monster(400, 322);
@@ -46,7 +46,7 @@ class LevelOne {
     this.myBackground.draw("level 1");
     this.myEndPoint.draw(500, 305);
 
-    this.player.draw("level 1");
+    this.player.draw();
 
     this.monster.draw(this.darkness.subLevel);
     this.monster.move(this.player, 80, 450);
