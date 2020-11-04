@@ -34,10 +34,6 @@ class LevelTwo {
     this.firstMsg = false; 
   }
 
-  playerCollidesWithElement(element) {
-    return this.player.x >= element.x && this.player.x <= element.x + element.width; 
-  }
-
   draw() {
     this.myBackground.draw("level 2");
     this.myEndPoint.draw(480, 129);
@@ -57,9 +53,9 @@ class LevelTwo {
 
     this.textBox.draw(this.player, this.monster);
 
-    if (this.playerCollidesWithElement(this.platform1)) {
+    if (this.player.collidesWithElement(this.platform1)) {
       this.player.usePlatform(this.platform1);
-    } else if (this.playerCollidesWithElement(this.platform2)) {
+    } else if (this.player.collidesWithElement(this.platform2)) {
       this.player.usePlatform(this.platform2);
     } else if (this.player.isOnPlatform) {
       this.player.leavePlatform();

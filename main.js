@@ -14,6 +14,8 @@ function preload() {
   playerFall = loadSpriteSheet("./assets/player/fall.png", 32, 32, 1);
   transformRunLeft = loadSpriteSheet("./assets/monster/newMonster/radishRunLeft.png", 30, 38, 12); 
   transformRunRight = loadSpriteSheet("./assets/monster/newMonster/radishRunRight.png", 30, 38, 12);
+  appearing = loadSpriteSheet("./assets/effects/appearing.png", 96, 96, 7);
+  disappearing = loadSpriteSheet("./assets/effects/disappearing.png", 96, 96, 7);
 
   // loading images, fonts 
   bgGeneral = loadImage("./assets/terrain/Background-dark.png");
@@ -43,6 +45,8 @@ function preload() {
   playerFallAnimation = loadAnimation(playerFall);
   transformRunLeftAnimation = loadAnimation(transformRunLeft);
   transformRunRightAnimation = loadAnimation(transformRunRight); 
+  appearingAnimation = loadAnimation(appearing);
+  disappearingAnimation = loadAnimation(disappearing);
 }
 
 // initializing classes 

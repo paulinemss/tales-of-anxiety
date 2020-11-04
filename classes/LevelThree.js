@@ -3,7 +3,7 @@ class LevelThree {
     this.myBackground = new Background();
     this.player = new Player(420, 64, 65, "level 3");
     this.monster1 = new Monster(100, 178);
-    this.monster2 = new Monster(470, 322);
+    this.monster2 = new Monster(470, 322, 3000);
     this.changedMonster1 = new ChangedMonster(
       this.monster1.x, 
       this.monster1.y, 
@@ -51,7 +51,7 @@ class LevelThree {
 
   draw() {
     this.myBackground.draw("level 3");
-    this.myEndPoint.draw(50, 304);
+    this.myEndPoint.draw(38, 304);
     this.player.draw();
 
     this.textBox.draw(this.player, this.monster1);
@@ -71,6 +71,9 @@ class LevelThree {
       this.changedMonster2.draw();
     }
     
+    disappearingAnimation.looping = false; 
+    animation(disappearingAnimation, 100, 100);
+    
     if (!this.firstMsg && !this.textBox.active) {
       this.textBox.open(
         ["these monsters are everywhere!"]
@@ -86,7 +89,7 @@ class LevelThree {
       this.textBox.open(
         ["from here I'm safe", "...", "what is happening?"]
       );
-      this.player.freeze();
+      this.freeze();
       this.textBox.onClose = () => {
         this.winning = false;
         this.winningMsg = true; 

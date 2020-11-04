@@ -1,5 +1,5 @@
 class Monster {
-  constructor(x, y) {
+  constructor(x, y, delay = 0) {
     this.x = x;
     this.y = y;
     this.width = 44;
@@ -8,7 +8,9 @@ class Monster {
     this.isFrozen = false;
     this.speed = 1; 
     this.speechTimeout = null;
+    this.speechInterval = null;
     this.msg = ''; 
+    this.delay = delay; 
   }
 
   spawn(x, y) {
@@ -19,15 +21,17 @@ class Monster {
   freeze() {
     this.isFrozen = true;
     this.msg = '';
+    this.stopSpeaking();
   }
   
   unfreeze() {
     this.isFrozen = false;
+    this.startSpeaking();
   }
 
   reset() {
-    clearInterval(this.speechTimeout);
-    this.speechTimeout = null;
+    clearInterval(this.speechInterval);
+    this.speechInterval = null;
     this.msg = '';
     msgIndex = 0;
   }
@@ -42,11 +46,29 @@ class Monster {
     return msg; 
   }
 
+  startSpeaking() {
+    this.speechTimeout = setTimeout(() => {
+      this.speechInterval = setInterval(() => {
+        if (this.msg === '') {
+          this.msg = this.speak(); 
+        } else {
+          this.msg = '';
+        }
+      }, 3000); 
+    }, this.delay);
+  }
+
+  stopSpeaking() {
+    clearInterval(this.speechInterval);
+    this.speechInterval = null;
+    this.speechTimeout = null; 
+  }
+
   move(player, leftBorder, rightBorder) {
     if (this.isFrozen) return;
 
     if (player.y < this.y - 10 || player.y > this.y + 10) {
-      this.speed = 1; 
+      this.speed = 1.5; 
       monsterRunLeftAnimation.frameDelay = 4;
       monsterRunRightAnimation.frameDelay = 4; 
       if (this.x <= leftBorder) {
@@ -55,7 +77,7 @@ class Monster {
         this.direction = "left";
       }
     } else {
-      this.speed = 2.5;
+      this.speed = 2;
       monsterRunLeftAnimation.frameDelay = 2;
       monsterRunRightAnimation.frameDelay = 2; 
       if (player.x < this.x) {
@@ -79,14 +101,8 @@ class Monster {
       animation(monsterRunRightAnimation, this.x, this.y);
     }
 
-    if (!this.speechTimeout && subLevel === 3 && this.isFrozen === false) { 
-      this.speechTimeout = setInterval(() => {
-        if (this.msg === '') {
-          this.msg = this.speak(); 
-        } else {
-          this.msg = '';
-        }
-      }, 3000); 
+    if (!this.speechTimeout && !this.speechInterval && subLevel === 3 && this.isFrozen === false) { 
+      this.startSpeaking();
     }
    
     if (this.msg && subLevel === 3) {

@@ -17,6 +17,15 @@ class TextBox {
     this.messages = arr;
     this.messageIndex = 0;
     this.active = true;
+
+    // a small idea on how to show the text letter by letter
+    // let msg = '';
+    // let textPosition = 1;
+    // setInterval(() => {
+    //   console.log(msg);
+    //   msg = this.messages[this.messageIndex].slice(0, textPosition);
+    //   textPosition += 1;
+    // }, 100); 
   }
 
   close() {

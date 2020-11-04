@@ -101,10 +101,8 @@ class Player {
     } else if (this.x >= WIDTH - 70) {
       return;
     }
-    if (this.level === "level 3") {
-      if (this.y === 322 && this.x > 100 && this.x < 150) {
-        return;
-      }
+    if (this.collidesWithCube()) {
+      return; 
     }
     this.x += 2;
     this.movement = "moveRight";
@@ -113,14 +111,8 @@ class Player {
   moveLeft() {
     if (this.isFrozen) return;
     if (this.x <= 70 && this.level !== "level 3") return; 
-    if (this.level === "level 3") {
-      if (this.y === 322 && this.x < 150 && this.x > 100) {
-        return;
-      } else if (this.x <= 70 && this.y < 300) {
-        return;
-      } else if (this.x <= 0 + this.width) {
-        return;
-      }
+    if (this.collidesWithCube()) {
+      return; 
     }
     this.x -= 2;
     this.movement = "moveLeft";
@@ -144,7 +136,28 @@ class Player {
   }
 
   die() {
+    this.freeze();
     this.movement = "dying";
+  }
+
+  collidesWithElement(element) {
+    return this.x >= element.x &&
+    this.x <= element.x + element.width &&
+    this.y <= element.y + 5; 
+  }
+
+  collidesWithCube() {
+    if (this.level !== "level 3") return false; 
+
+    if (this.y === 322 && this.x < 150 && this.x > 100) {
+      return true;
+    } else if (this.x <= 70 && this.y < 300) {
+      return true;
+    } else if (this.x <= 0 + this.width) {
+      return true;
+    } 
+
+    return false; 
   }
 
   draw() {

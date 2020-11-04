@@ -42,6 +42,10 @@ let torchOff;
 let torchOffAnimation;
 let platform; 
 let spikeBall; 
+let appearing;
+let appearingAnimation;
+let disappearing;
+let disappearingAnimation;
 
 // BACKGROUNDS // 
 
