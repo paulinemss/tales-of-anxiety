@@ -1,6 +1,7 @@
 function preload() {
   // loading spritesheets
   playerIdle = loadSpriteSheet("/assets/player/idle.png", 32, 32, 11);
+  playerIdleLeft = loadSpriteSheet("/assets/player/idleLeft.png", 32, 32, 11);
   playerRunRight = loadSpriteSheet("/assets/player/runRight.png", 32, 32, 12);
   playerRunLeft = loadSpriteSheet("/assets/player/runLeft.png", 32, 32, 12);
   playerJump = loadSpriteSheet("/assets/player/jump.png", 32, 32, 1);
@@ -11,9 +12,11 @@ function preload() {
   torchOn = loadSpriteSheet("/assets/terrain/torchOn.png", 16, 32, 3);
   torchOff = loadSpriteSheet("/assets/terrain/torchOff.png", 16, 32, 1);
   playerFall = loadSpriteSheet("/assets/player/fall.png", 32, 32, 1);
+  transformRunLeft = loadSpriteSheet("/assets/monster/newMonster/radishRunLeft.png", 30, 38, 12); 
+  transformRunRight = loadSpriteSheet("/assets/monster/newMonster/radishRunRight.png", 30, 38, 12);
 
   // loading images, fonts 
-  bgGeneral = loadImage("/assets/terrain/Background-Green.png");
+  bgGeneral = loadImage("/assets/terrain/Background-dark.png");
   bgIntro = loadImage("/assets/terrain/Intro.png");
   bgLevelOne = loadImage("/assets/terrain/Level1.png");
   bgLevelOneDark1 = loadImage("/assets/terrain/Dark-Level1-1.png");
@@ -27,6 +30,7 @@ function preload() {
 
   // loading animations 
   playerIdleAnimation = loadAnimation(playerIdle);
+  playerIdleLeftAnimation = loadAnimation(playerIdleLeft);
   playerRunRightAnimation = loadAnimation(playerRunRight);
   playerRunLeftAnimation = loadAnimation(playerRunLeft);
   playerJumpAnimation = loadAnimation(playerJump);
@@ -37,6 +41,8 @@ function preload() {
   torchOnAnimation = loadAnimation(torchOn);
   torchOffAnimation = loadAnimation(torchOff);
   playerFallAnimation = loadAnimation(playerFall);
+  transformRunLeftAnimation = loadAnimation(transformRunLeft);
+  transformRunRightAnimation = loadAnimation(transformRunRight); 
 }
 
 // initializing classes 
@@ -48,7 +54,6 @@ const winning = new Winning();
 const loosing = new Loosing(); 
 
 // initializing the level
-let level = "beginning";
 let wonLevelOne = false; 
 let wonLevelTwo = false; 
 
@@ -86,20 +91,19 @@ function draw() {
     levelOne.player.die();
   }
 
-  if (levelOne.player.y > HEIGHT) {
-    level = "loosing";
-  }
-
-  // LEVEL 2 if the player touches the monster or falls down and looses
+  // LEVEL 2 if the player touches the monster or falls down or touches the spike moving in the middle and looses
   if (levelTwo.player.collisionCheck(levelTwo.monster) || levelTwo.player.y > 380 || levelTwo.player.collisionCheck(levelTwo.spike)) {
     levelTwo.monster.freeze();
     levelTwo.player.die();
   }
 
-  if (levelTwo.player.y > HEIGHT) {
-    level = "loosing";
+  // LEVEL 3 if the player touches the monsters and looses 
+  if (levelThree.player.collisionCheck(levelThree.monster1) || levelThree.player.collisionCheck(levelThree.monster2)) {
+    levelThree.monster1.freeze();
+    levelThree.monster2.freeze();
+    levelThree.player.die();
   }
-
+  
   // LEVEL 1 if the player touches the end point and wins
   if (levelOne.myEndPoint.collisionCheck(levelOne.player) && level === "level 1") {
     levelOne.freeze();
@@ -116,18 +120,23 @@ function draw() {
 
   // LEVEL 3 if the player finalizes the story and wins 
   if (levelThree.myEndPoint.collisionCheck(levelThree.player)) {
-    levelThree.freeze();
-    level = "winning";
+    levelThree.winning = true; 
   }
 }
 
 function keyPressed() {
   if (keyCode === 32) {
+    
+    // press "space" to go through text boxes 
     if (levelOne.textBox.active) {
       levelOne.textBox.messageIndex++;
     } else if (levelTwo.textBox.active) {
       levelTwo.textBox.messageIndex++;
+    } else if (levelThree.textBox.active) {
+      levelThree.textBox.messageIndex++;
     } else {
+
+      // press "space" to jump 
       if (level === "level 1") {
         levelOne.player.jump();
       } else if (level === "level 2") {
@@ -141,6 +150,8 @@ function keyPressed() {
 
 function keyReleased() {
   if (keyCode === 39 || keyCode === 37) {
+
+    // to reset the player to idle animation after moving
     if (level === "level 1") {
       levelOne.player.reset();
     } else if (level === "level 2") {
@@ -151,14 +162,17 @@ function keyReleased() {
   }
 }
 
+// function attached to the "start game" button
 function startGame() {
   startGameButton.hide();
   level = "level 1";
 }
 
+// function attached to the "restart level" button
 function restartLevel() {
   levelOne.reset();
   levelTwo.reset();
+  levelThree.reset();
   if (wonLevelOne && wonLevelTwo) {
     level = "level 3"; 
   } else if (wonLevelOne && !wonLevelTwo) {
@@ -170,9 +184,11 @@ function restartLevel() {
   if (restartLevelButton) { restartLevelButton.hide(); }
 }
 
+// function attached to the "restart game" button
 function restartGame() {
   levelOne.reset();
   levelTwo.reset();
+  levelThree.reset();
   level = "beginning";
   wonLevelOne = false;
   wonLevelTwo = false; 

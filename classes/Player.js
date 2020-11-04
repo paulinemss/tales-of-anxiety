@@ -171,7 +171,7 @@ class Player {
       animation(playerIdleAnimation, this.x, this.y);
     } else if (this.movement === "dying") {
       animation(playerFallAnimation, this.x, this.y);
-      this.y += 2;
+      this.y += 3;
     } else if (this.movement === "moveRight" && !this.isInTheAir()) {
       animation(playerRunRightAnimation, this.x, this.y);
     } else if (this.movement === "moveLeft" && !this.isInTheAir()) {
@@ -186,6 +186,10 @@ class Player {
 
     if (this.y === this.floor && this.movement === "jumping") {
       this.movement = "idle";
+    }
+
+    if (this.y > HEIGHT) {
+      level = "loosing";
     }
   }
 }

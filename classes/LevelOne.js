@@ -30,8 +30,7 @@ class LevelOne {
   }
 
   reset() {
-    this.player.unfreeze();
-    this.monster.unfreeze();
+    this.unfreeze();
     this.player.spawn(390, 130);
     this.monster.spawn(400, 322);
     this.monster.reset();
@@ -59,7 +58,7 @@ class LevelOne {
 
     if (!this.firstMsg && !this.textBox.active) {
       this.textBox.open(
-        ["...", "where are we?", "should we try to find a way out?"]
+        ["...", "where are we?", "should we try to\n find a way out?"]
       );
       this.freeze();
       this.textBox.onClose = () => {
@@ -70,7 +69,7 @@ class LevelOne {
 
     if (this.darkness.subLevel === 2 && !this.secondMsg && !this.textBox.active) {
       this.textBox.open(
-        ["nice! let's get the second torch"]
+        ["nice! let's get\n the second torch"]
       );
       this.freeze();
       this.textBox.onClose = () => {

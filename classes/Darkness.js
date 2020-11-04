@@ -45,7 +45,6 @@ class Darkness {
       isTouchingOnBottom
     ) {
       torch.state = "on";
-      //torchOnAnimation.frameDelay = 8;
     } 
   }
 
