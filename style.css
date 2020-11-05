@@ -68,6 +68,7 @@ body {
 }
 
 .footer a {
+  text-decoration: underline;
   color: black;
 }
 

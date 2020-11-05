@@ -32,8 +32,6 @@ function preload() {
   spikeBall = loadImage("./assets/terrain/spikeBall.png");
   gameFont = loadFont("./assets/font/PressStart2P-Regular.ttf");
   songIntro = loadSound("./assets/music/introMusic.mp3"); 
-  songLevels = loadSound("./assets/music/levels.mp3");
-  songFinal = loadSound("./assets/music/finalMusic.mp3");
 
   // loading animations 
   playerIdleAnimation = loadAnimation(playerIdle);
@@ -130,7 +128,7 @@ function draw() {
   }
 
   // LEVEL 2 if the player touches the end point and wins 
-  if (levelTwo.myEndPoint.collisionCheck(levelTwo.player)) {
+  if (levelTwo.myEndPoint.collisionCheck(levelTwo.player) && level === "level 2") {
     levelTwo.freeze();
     level = "level 3";
     wonLevelTwo = true; 

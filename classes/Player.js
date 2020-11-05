@@ -104,7 +104,7 @@ class Player {
     } else if (this.x >= WIDTH - 70) {
       return;
     }
-    if (this.collidesWithCube()) {
+    if (this.collidesWithCube(2)) {
       return; 
     }
     this.x += 2;
@@ -114,7 +114,7 @@ class Player {
   moveLeft() {
     if (this.isFrozen) return;
     if (this.x <= 70 && this.level !== "level 3") return; 
-    if (this.collidesWithCube()) {
+    if (this.collidesWithCube(-2)) {
       return; 
     }
     this.x -= 2;
@@ -151,10 +151,10 @@ class Player {
     this.y <= element.y + 5; 
   }
 
-  collidesWithCube() {
+  collidesWithCube(num) {
     if (this.level !== "level 3") return false; 
 
-    if (this.y <= 322 && this.y >= 295 && this.x < 150 && this.x > 106) {
+    if (this.y <= 322 && this.y >= 295 && this.x + num < 150 && this.x + num > 106) {
       return true;
     } else if (this.x <= 0 + this.width) {
       return true;

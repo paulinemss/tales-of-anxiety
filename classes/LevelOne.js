@@ -58,7 +58,7 @@ class LevelOne {
 
     if (!this.firstMsg && !this.textBox.active) {
       this.textBox.open(
-        ["...", "where are we?", "should we try to\n find a way out?"]
+        ["...", "where are we?", "it's pretty dark\n in here", "let's find a way\n to turn on the light"]
       );
       this.freeze();
       this.textBox.onClose = () => {

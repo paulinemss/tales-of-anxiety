@@ -92,7 +92,7 @@ class LevelThree {
       this.monster1.draw(3);
       this.monster2.draw(3);
       this.monster1.move(this.player, 80, 420);
-      this.monster2.move(this.player, 160, WIDTH - 80);
+      //this.monster2.move(this.player, 160, WIDTH - 80);
     } else if (this.winningMsg) {
       this.showNewMonsters();
       this.textBox.draw(this.player, this.changedMonster1, this.changedMonster2);

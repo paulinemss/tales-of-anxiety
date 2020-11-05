@@ -64,10 +64,7 @@ let bgConclusion;
 
 // MUSIC, BUTTONS AND LINKS // 
 
-let currentSong; 
 let songIntro; 
-let songLevels; 
-let songFinal; 
 let startGameButton;
 let restartLevelButton;
 let restartGameButton;
@@ -88,7 +85,7 @@ let anxietyThoughts = [
   "Antibiotic resistance\n is a rising problem that\n should concern you",
   "You've been eating way\n too much processed food\n and sugar lately",
   "Your last match on Tinder\n was probably a psychopathic\n serial killer",
-  "Everyone think you\n are the most annoying\n person on the planet",
+  "Everyone thinks you\n are the most annoying\n person on the planet",
   "What if gravity stops\n working and you fall\n into space forever?",
   "Did you remember to turn\n off the oven before leaving\n home today?",
   "All your friends secretly\n hate you and are plotting\n against you",

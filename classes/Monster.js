@@ -32,6 +32,8 @@ class Monster {
 
   reset() {
     clearInterval(this.speechInterval);
+    clearTimeout(this.speechTimeout);
+    this.speechTimeout = null;
     this.speechInterval = null;
     this.msg = '';
     msgIndex = 0;
@@ -49,6 +51,8 @@ class Monster {
   }
 
   startSpeaking() {
+    if (this.speechTimeout) return;
+    
     this.speechTimeout = setTimeout(() => {
       this.speechInterval = setInterval(() => {
         if (this.msg === '') {
