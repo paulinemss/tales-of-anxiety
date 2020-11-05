@@ -126,6 +126,10 @@ function draw() {
   if (levelThree.myEndPoint.collisionCheck(levelThree.player)) {
     levelThree.winning = true; 
   }
+
+  if (levelThree.monsterConversation === true) {
+    level = "winning";
+  }
 }
 
 function keyPressed() {

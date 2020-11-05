@@ -6,6 +6,7 @@ class Monster {
     this.height = 30;
     this.direction = "left";
     this.isFrozen = false;
+    this.followPlayer = true; 
     this.speed = 1; 
     this.speechTimeout = null;
     this.speechInterval = null;
@@ -34,6 +35,7 @@ class Monster {
     this.speechInterval = null;
     this.msg = '';
     msgIndex = 0;
+    this.followPlayer = true;
   }
 
   speak() {
@@ -68,7 +70,7 @@ class Monster {
     if (this.isFrozen) return;
 
     if (player.y < this.y - 10 || player.y > this.y + 10) {
-      this.speed = 1.5; 
+      this.speed = 1.3; 
       monsterRunLeftAnimation.frameDelay = 4;
       monsterRunRightAnimation.frameDelay = 4; 
       if (this.x <= leftBorder) {
@@ -76,7 +78,7 @@ class Monster {
       } else if (this.x >= rightBorder) {
         this.direction = "left";
       }
-    } else {
+    } else if (this.followPlayer) {
       this.speed = 2;
       monsterRunLeftAnimation.frameDelay = 2;
       monsterRunRightAnimation.frameDelay = 2; 

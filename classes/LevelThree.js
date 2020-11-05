@@ -18,6 +18,8 @@ class LevelThree {
     this.firstMsg = false; 
     this.winningMsg = false; 
     this.winning = false; 
+    this.showDisappearingAnim = true; 
+    this.monsterConversation = false; 
     this.textBox = new TextBox();
   }
 
@@ -47,6 +49,33 @@ class LevelThree {
     this.firstMsg = false; 
     this.winningMsg = false; 
     this.winning = false; 
+    this.showDisappearingAnim = true; 
+    this.monsterConversation = false; 
+  }
+
+  showNewMonsters() {
+    // this only happens for the first 700 ms 
+    if (this.showDisappearingAnim === true) {
+      disappearingAnimation.looping = false; 
+      animation(disappearingAnimation, this.monster1.x, this.monster1.y);
+
+      disappearingAnimation.looping = false; 
+      animation(disappearingAnimation, this.monster2.x, this.monster2.y);
+
+      this.changedMonster1.changePosition(this.monster1.x, this.monster1.y - 3);
+      this.changedMonster2.changePosition(this.monster2.x, this.monster2.y - 3);
+    }
+    
+    // draw the new radish monsters 
+    this.changedMonster1.draw();
+    this.changedMonster2.draw();
+    this.changedMonster1.move(80, 420);
+    this.changedMonster2.move(160, WIDTH - 80);
+
+    // hide disappearing animation
+    setTimeout(() => {
+      this.showDisappearingAnim = false; 
+    }, 700);
   }
 
   draw() {
@@ -54,25 +83,20 @@ class LevelThree {
     this.myEndPoint.draw(38, 304);
     this.player.draw();
 
-    this.textBox.draw(this.player, this.monster1);
-
     if (!this.firstMsg && !this.winningMsg) {
+      this.textBox.draw(this.player, this.monster1);
       this.monster1.draw();
       this.monster2.draw();
     } else if (this.firstMsg && !this.winningMsg) { 
+      this.textBox.draw(this.player, this.monster1);
       this.monster1.draw(3);
       this.monster2.draw(3);
       this.monster1.move(this.player, 80, 420);
       this.monster2.move(this.player, 160, WIDTH - 80);
     } else if (this.winningMsg) {
-      this.changedMonster1.changePosition(this.monster1.x, this.monster1.y);
-      this.changedMonster2.changePosition(this.monster2.x, this.monster2.y);
-      this.changedMonster1.draw();
-      this.changedMonster2.draw();
+      this.showNewMonsters();
+      this.textBox.draw(this.player, this.changedMonster1);
     }
-    
-    disappearingAnimation.looping = false; 
-    animation(disappearingAnimation, 100, 100);
     
     if (!this.firstMsg && !this.textBox.active) {
       this.textBox.open(
@@ -93,6 +117,16 @@ class LevelThree {
       this.textBox.onClose = () => {
         this.winning = false;
         this.winningMsg = true; 
+      }
+    }
+
+    if (this.winningMsg && !this.monsterConversation && !this.textBox.active) {
+      this.textBox.open(
+        ["monster: we're sorry we scared you!", "monster: we are not that evil", "..."]
+      );
+      this.freeze();
+      this.textBox.onClose = () => {
+        this.monsterConversation = true; 
       }
     }
 
