@@ -95,12 +95,12 @@ class LevelThree {
       this.monster2.move(this.player, 160, WIDTH - 80);
     } else if (this.winningMsg) {
       this.showNewMonsters();
-      this.textBox.draw(this.player, this.changedMonster1);
+      this.textBox.draw(this.player, this.changedMonster1, this.changedMonster2);
     }
     
     if (!this.firstMsg && !this.textBox.active) {
       this.textBox.open(
-        ["these monsters are everywhere!"]
+        ["these monsters\n are everywhere!"]
       );
       this.freeze();
       this.textBox.onClose = () => {
@@ -122,7 +122,7 @@ class LevelThree {
 
     if (this.winningMsg && !this.monsterConversation && !this.textBox.active) {
       this.textBox.open(
-        ["monster: we're sorry we scared you!", "monster: we are not that evil", "..."]
+        ["niceMonster1: we're sorry we\n scared you!", "niceMonster2: we just want\n to protect you", "niceMonster1: life can be so\n scary sometimes", "niceMonster2: danger seems to\n be everywhere!", "...", "you don't seem so\n scary after all", "niceMonster1: let's be friends,\n okay?"]
       );
       this.freeze();
       this.textBox.onClose = () => {

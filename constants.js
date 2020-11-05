@@ -2,7 +2,7 @@
 
 let WIDTH = 600;
 let HEIGHT = 400;
-let level = "beginning";
+let level = "level 3";
 
 // PLAYER ANIMATIONS // 
 
@@ -82,6 +82,9 @@ let anxietyThoughts = [
   "Your last match on Tinder\n was probably a psychopathic\n serial killer",
   "Everyone think you\n are the most annoying\n person on the planet",
   "What if gravity stops\n working and you fall\n into space forever?",
-  "Did you remember to turn\n off the oven before leaving\n home today?"
+  "Did you remember to turn\n off the oven before leaving\n home today?",
+  "All your friends secretly\n hate you and are plotting\n against you",
+  "Climate change is\n destroying our planet and\n there's nothing you can do",
+  "Would you like a list\n of all of your failures and\n mistakes since 2005?"
 ]; 
 

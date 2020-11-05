@@ -80,7 +80,7 @@ class LevelOne {
 
     if (this.darkness.subLevel === 3 && !this.thirdMsg && !this.textBox.active) {
       this.textBox.open(
-        ["what is this monster?", "monster: you should work\n instead of playing a\n game in your browser", "that's a bit harsh!", "let's run away from it"]
+        ["what is that?", "monster: you should work\n instead of playing a\n game in your browser", "that's a bit harsh!", "monster: you are not productive\n enough and you should\n feel bad about that", "...", "let's run away"]
       );
       this.freeze();
       this.textBox.onClose = () => {

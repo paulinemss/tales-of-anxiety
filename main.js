@@ -28,7 +28,7 @@ function preload() {
   bgConclusion = loadImage("./assets/terrain/Conclusion.png");
   platform = loadImage("./assets/terrain/platform.png");
   spikeBall = loadImage("./assets/terrain/spikeBall.png");
-  gameFont = loadFont("./assets/font/PressStart2P-Regular.ttf")
+  gameFont = loadFont("./assets/font/PressStart2P-Regular.ttf");
 
   // loading animations 
   playerIdleAnimation = loadAnimation(playerIdle);

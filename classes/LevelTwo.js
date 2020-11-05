@@ -26,7 +26,7 @@ class LevelTwo {
   }
 
   reset() {
-    this.player.spawn(100, 200);
+    this.player.spawn(100, 226);
     this.monster.spawn(374, 370);
     this.unfreeze();
     this.monster.reset();
@@ -63,7 +63,7 @@ class LevelTwo {
 
     if (!this.firstMsg && !this.textBox.active) {
       this.textBox.open(
-        ["it was close!", "there's another\n anxiety monster\n here!", "monster: you are probably going\n to fail this level"]
+        ["it was close!", "there's another\n anxiety monster!", "monster: you are probably going\n to fail this level", "let's see about\n that!"]
       );
       this.freeze();
       this.textBox.onClose = () => {

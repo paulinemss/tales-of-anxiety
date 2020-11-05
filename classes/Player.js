@@ -30,7 +30,7 @@ class Player {
 
   findFloor() {
     if (this.level === "level 1") {
-      if (this.velocity >= 0 && this.y < 250 && this.x < 240) {
+      if (this.velocity >= 0 && this.y < 200 && this.x < 240) {
         return 194;
       } else if (this.y < 140 && this.x > 355) {
         return 130;
