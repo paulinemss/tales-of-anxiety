@@ -11,7 +11,7 @@ class Intro {
   setup() {
     this.width = WIDTH;
     this.height = HEIGHT;
-
+  
     setTimeout(() => {
       this.subTitle = "TALES"; 
     }, 1000);

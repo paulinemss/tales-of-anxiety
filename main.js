@@ -17,7 +17,7 @@ function preload() {
   appearing = loadSpriteSheet("./assets/effects/appearing.png", 96, 96, 7);
   disappearing = loadSpriteSheet("./assets/effects/disappearing.png", 96, 96, 7);
 
-  // loading images, fonts 
+  // loading images, fonts, songs 
   bgGeneral = loadImage("./assets/terrain/Background-dark.png");
   bgIntro = loadImage("./assets/terrain/Intro.png");
   bgLevelOne = loadImage("./assets/terrain/Level1.png");
@@ -29,6 +29,9 @@ function preload() {
   platform = loadImage("./assets/terrain/platform.png");
   spikeBall = loadImage("./assets/terrain/spikeBall.png");
   gameFont = loadFont("./assets/font/PressStart2P-Regular.ttf");
+  songIntro = loadSound("./assets/music/introMusic.mp3"); 
+  songLevels = loadSound("./assets/music/levels.mp3");
+  songFinal = loadSound("./assets/music/finalMusic.mp3");
 
   // loading animations 
   playerIdleAnimation = loadAnimation(playerIdle);
@@ -60,6 +63,9 @@ const loosing = new Loosing();
 // initializing the level
 let wonLevelOne = false; 
 let wonLevelTwo = false; 
+
+// initializing the music
+let volume = 0; 
 
 function setup() {
   createCanvas(WIDTH, HEIGHT);
@@ -204,3 +210,24 @@ function restartGame() {
   if (restartLevelButton) { restartLevelButton.hide(); }
   if (learnMoreLink) { learnMoreLink.hide(); }
 }
+
+// functions to play song and change the sound button 
+const soundButton = document.querySelector(".soundButton"); 
+
+soundButton.addEventListener("click", () => {
+  if (volume === 0.5) {
+    soundButton.innerHTML = '<i class="fas fa-volume-down"></i>';
+    volume = 0.1; 
+    songIntro.setVolume(volume);
+  } else if (volume === 0.1) {
+    soundButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    volume = 0; 
+    songIntro.stop();
+  } else if (volume === 0) {
+    soundButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+    volume = 0.5; 
+    songIntro.loop();
+    songIntro.play();
+    songIntro.setVolume(volume);
+  }
+});

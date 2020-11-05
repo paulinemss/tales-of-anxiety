@@ -58,8 +58,12 @@ let bgLevelTwo;
 let bgLevelThree; 
 let bgConclusion;
 
-// BUTTONS AND LINKS // 
+// MUSIC, BUTTONS AND LINKS // 
 
+let currentSong; 
+let songIntro; 
+let songLevels; 
+let songFinal; 
 let startGameButton;
 let restartLevelButton;
 let restartGameButton;
