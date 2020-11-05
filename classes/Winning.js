@@ -25,7 +25,7 @@ class Winning {
     }
    
     if (!restartGameButton) {
-      restartGameButton = createButton('Restart Game');
+      restartGameButton = createButton('RESTART GAME');
       restartGameButton.addClass("lastRestartGame");
       restartGameButton.addClass("allButtons");
       restartGameButton.mousePressed(restartGame);

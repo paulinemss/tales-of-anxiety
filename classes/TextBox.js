@@ -13,7 +13,6 @@ class TextBox {
   }
 
   open(arr) {
-    console.log("open");
     this.messages = arr;
     this.messageIndex = 0;
     this.active = true;
@@ -29,7 +28,6 @@ class TextBox {
   }
 
   close() {
-    console.log("close");
     this.messages = [];
     this.messageIndex = 0;
     this.active = false; 

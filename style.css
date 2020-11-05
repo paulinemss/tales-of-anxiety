@@ -24,7 +24,9 @@ body {
 }
 
 .startGameButton {
-  top: 470px;
+  top: 430px;
+  background-color: #d2612f;
+  color: white; 
 }
 
 .restartLevelButton {
@@ -32,12 +34,15 @@ body {
 }
 
 .restartGameButton {
-  top: 470px; 
+  top: 450px; 
+  background-color: #d2612f;
+  color: white; 
 }
 
 .lastRestartGame {
   top: 470px;
-  border: 2px solid black;
+  background-color: black;
+  color: white; 
 }
 
 .learnMoreLink {
