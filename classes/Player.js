@@ -88,9 +88,11 @@ class Player {
     }
   }
 
-  reset() {
-    if (this.movement !== "dying") {
+  reset(side) {
+    if (this.movement !== "dying" && side === "right") {
       this.movement = "idle";
+    } else if (this.movement !== "dying" && side === "left") {
+      this.movement = "idleLeft";
     }
   }
 
@@ -120,7 +122,6 @@ class Player {
 
   jump() {
     if (this.isFrozen) return;
-
     if (this.jumpCounts === 2) {
       return;
     }
@@ -198,7 +199,9 @@ class Player {
     }
 
     if (this.movement === "idle") {
-      animation(playerIdleAnimation, this.x, this.y);
+      animation(playerIdleAnimation, this.x, this.y); 
+    } else if (this.movement === "idleLeft") {
+      animation(playerIdleLeftAnimation, this.x, this.y); 
     } else if (this.movement === "dying") {
       animation(playerFallAnimation, this.x, this.y);
       this.y += 3;

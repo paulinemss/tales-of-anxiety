@@ -52,7 +52,7 @@ class Intro {
     text(this.subTitle, WIDTH / 2, 75);
 
     fill(255, 255, 255);
-    textSize(28);
+    textSize(30);
     text(this.title, WIDTH / 2, 115);
 
     if (this.showAnxiety) {

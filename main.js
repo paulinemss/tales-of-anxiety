@@ -6,6 +6,8 @@ function preload() {
   playerRunLeft = loadSpriteSheet("./assets/player/runLeft.png", 32, 32, 12);
   playerJump = loadSpriteSheet("./assets/player/jump.png", 32, 32, 1);
   playerDblJump = loadSpriteSheet("./assets/player/doubleJump.png", 32, 32, 6);
+  playerJumpLeft = loadSpriteSheet("./assets/player/jumpLeft.png", 32, 32, 1);
+  playerDblJumpLeft = loadSpriteSheet("./assets/player/doubleJumpLeft.png", 32, 32, 6);
   monsterRunRight = loadSpriteSheet("./assets/monster/runRight.png", 44, 30, 10);
   monsterRunLeft = loadSpriteSheet("./assets/monster/runLeft.png", 44, 30, 10);
   endPoint = loadSpriteSheet("./assets/terrain/endPoint.png", 64, 64, 17);
@@ -40,6 +42,8 @@ function preload() {
   playerRunLeftAnimation = loadAnimation(playerRunLeft);
   playerJumpAnimation = loadAnimation(playerJump);
   playerDblJumpAnimation = loadAnimation(playerDblJump);
+  playerJumpLeftAnimation = loadAnimation(playerJumpLeft);
+  playerDblJumpLeftAnimation = loadAnimation(playerDblJumpLeft);
   monsterRunRightAnimation = loadAnimation(monsterRunRight);
   monsterRunLeftAnimation = loadAnimation(monsterRunLeft);
   endPointAnimation = loadAnimation(endPoint);
@@ -64,11 +68,15 @@ const loosing = new Loosing();
 let wonLevelOne = false; 
 let wonLevelTwo = false; 
 
-// initializing the music
+// initializing the music and DOM elements
 let volume = 0; 
+const soundButton = document.querySelector(".soundButton"); 
+const footer = document.querySelector(".footer"); 
 
 function setup() {
   createCanvas(WIDTH, HEIGHT);
+  footer.style.display = "flex";
+  soundButton.style.display = "flex";
   levelOne.setup();
   levelTwo.setup();
   levelThree.setup();
@@ -162,16 +170,23 @@ function keyPressed() {
   }
 }
 
+// to reset the player to idle animation after moving
 function keyReleased() {
-  if (keyCode === 39 || keyCode === 37) {
-
-    // to reset the player to idle animation after moving
+  if (keyCode === 39) {
     if (level === "level 1") {
-      levelOne.player.reset();
+      levelOne.player.reset("right");
     } else if (level === "level 2") {
-      levelTwo.player.reset();
+      levelTwo.player.reset("right");
     } else if (level === "level 3") {
-      levelThree.player.reset();
+      levelThree.player.reset("right");
+    }
+  } else if (keyCode === 37) {
+    if (level === "level 1") {
+      levelOne.player.reset("left");
+    } else if (level === "level 2") {
+      levelTwo.player.reset("left");
+    } else if (level === "level 3") {
+      levelThree.player.reset("left");
     }
   }
 }
@@ -212,8 +227,6 @@ function restartGame() {
 }
 
 // functions to play song and change the sound button 
-const soundButton = document.querySelector(".soundButton"); 
-
 soundButton.addEventListener("click", () => {
   if (volume === 0.5) {
     soundButton.innerHTML = '<i class="fas fa-volume-down"></i>';

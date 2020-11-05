@@ -18,6 +18,10 @@ let playerJump;
 let playerJumpAnimation;
 let playerDblJump;
 let playerDblJumpAnimation;
+let playerJumpLeft;
+let playerJumpLeftAnimation;
+let playerDblJumpLeft;
+let playerDblJumpLeftAnimation;
 let playerFall; 
 let playerFallAnimation;
 

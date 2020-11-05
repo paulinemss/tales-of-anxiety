@@ -60,6 +60,7 @@ body {
   display: flex; 
   justify-content: space-evenly;
   width: 310px;
+  display: none;
 }
 
 .footer i {
@@ -67,12 +68,12 @@ body {
 }
 
 .footer a {
-  text-decoration: underline;
   color: black;
 }
 
 .soundButton { 
-  color: white; 
+  display: none;
+  color: #D3D3D3; 
   font-size: 18px; 
   background: none; 
   border: none;
