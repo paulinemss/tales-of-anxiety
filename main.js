@@ -243,4 +243,5 @@ soundButton.addEventListener("click", () => {
     songIntro.play();
     songIntro.setVolume(volume);
   }
+  soundButton.blur(); 
 });

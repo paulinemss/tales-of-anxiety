@@ -12,6 +12,7 @@ class Player {
     this.isFrozen = false;
     this.isOnPlatform = false; 
     this.level = level;
+    this.previousMovement = "idle";
   }
 
   spawn(x, y) {
@@ -129,6 +130,9 @@ class Player {
     this.velocity -= 4;
     this.velocity = Math.max(this.velocity, -5);
     this.jumpCounts++;
+    if (this.movement !== "jumping") {
+      this.previousMovement = this.movement;
+    }
     this.movement = "jumping";
   }
 
@@ -211,14 +215,26 @@ class Player {
       animation(playerRunLeftAnimation, this.x, this.y);
     } else if (this.movement === "jumping" || this.isInTheAir()) {
       if (this.jumpCounts === 1) {
-        animation(playerJumpAnimation, this.x, this.y);
+        if (this.previousMovement === "idle" || this.previousMovement === "moveRight") {
+          animation(playerJumpAnimation, this.x, this.y);
+        } else {
+          animation(playerJumpLeftAnimation, this.x, this.y);
+        }
       } else {
-        animation(playerDblJumpAnimation, this.x, this.y);
+        if (this.previousMovement === "idle" || this.previousMovement === "moveRight") {
+          animation(playerDblJumpAnimation, this.x, this.y);
+        } else {
+          animation(playerDblJumpLeftAnimation, this.x, this.y);
+        }
       }
     }
 
     if (this.y === this.floor && this.movement === "jumping") {
-      this.movement = "idle";
+      if (this.previousMovement === "idle" || this.previousMovement === "moveRight") {
+        this.movement = "idle"; 
+      } else {
+        this.movement = "idleLeft";
+      }
     }
 
     if (this.y > HEIGHT) {
