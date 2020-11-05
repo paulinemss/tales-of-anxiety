@@ -14,4 +14,4 @@ Everyone feels anxious sometimes. Tales of Anxiety is a 3-levels browser game th
 
 ### Portfolio Project
 
-Tales of Anxiety is a JavaScript game built using p5.js and p5.play libraries and created by [Pauline Massé](https://github.com/paulinemss). The assets were designed by [Pixel Frog](https://pixelfrog-store.itch.io/).  
+Tales of Anxiety is a JavaScript game built using p5.js and p5.play libraries and created by [Pauline Massé](https://github.com/paulinemss). The assets were designed by [Pixel Frog](https://pixelfrog-store.itch.io/), and the music by [Pix](https://youtu.be/5a83feE_oTI).
