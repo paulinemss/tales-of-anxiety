@@ -124,6 +124,7 @@ class LevelThree {
       this.textBox.open(
         ["niceMonster1: we're sorry we\n scared you!", "niceMonster2: we just want\n to protect you", "niceMonster1: life can be so\n scary sometimes", "niceMonster2: danger seems to\n be everywhere!", "...", "you don't seem so\n scary after all", "niceMonster1: let's be friends,\n okay?"]
       );
+      this.player.movement = "idle";
       this.freeze();
       this.textBox.onClose = () => {
         this.monsterConversation = true; 
