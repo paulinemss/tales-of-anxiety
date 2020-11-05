@@ -1,6 +1,6 @@
 body {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   align-items: center;
   font-family: 'Press Start 2P';
   background-color: seashell;
@@ -47,4 +47,20 @@ body {
   top: 370px; 
   text-align: center;
   line-height: 1.6;
+}
+
+.footer {
+  margin-top: 25px; 
+  font-size: 10px;
+  display: flex; 
+  justify-content: space-evenly;
+  width: 310px;
+}
+
+.footer i {
+  font-weight: 700;
+}
+.footer a {
+  text-decoration: underline;
+  color: black;
 }

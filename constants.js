@@ -2,7 +2,7 @@
 
 let WIDTH = 600;
 let HEIGHT = 400;
-let level = "level 1";
+let level = "beginning";
 
 // PLAYER ANIMATIONS // 
 
