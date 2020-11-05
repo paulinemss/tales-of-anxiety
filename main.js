@@ -96,7 +96,7 @@ function draw() {
   }
 
   // LEVEL 2 if the player touches the monster or falls down or touches the spike moving in the middle and looses
-  if (levelTwo.player.collisionCheck(levelTwo.monster) || levelTwo.player.y > 380 || levelTwo.player.collisionCheck(levelTwo.spike)) {
+  if (levelTwo.player.collisionCheck(levelTwo.monster) || levelTwo.player.y > 380 || levelTwo.player.collidesWithSpike(levelTwo.spike)) {
     levelTwo.monster.freeze();
     levelTwo.player.die();
   }

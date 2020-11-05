@@ -52,7 +52,7 @@ class Player {
         return 65;
       } else if (this.y <= 176 && this.x < 450) {
         return 176;
-      } else if (this.y <= 290 && this.x > 104 && this.x < 145) {
+      } else if (this.y <= 290 && this.x > 106 && this.x < 150) {
         return 290;
       } else {
         return 322;
@@ -149,15 +149,32 @@ class Player {
   collidesWithCube() {
     if (this.level !== "level 3") return false; 
 
-    if (this.y === 322 && this.x < 150 && this.x > 100) {
-      return true;
-    } else if (this.x <= 70 && this.y < 300) {
+    if (this.y <= 322 && this.y >= 295 && this.x < 150 && this.x > 106) {
       return true;
     } else if (this.x <= 0 + this.width) {
       return true;
     } 
 
     return false; 
+  }
+
+  collidesWithSpike(spike) {
+    const isTouchingOnLeft = this.x + this.width - 20 >= spike.x;
+    const isTouchingOnRight = this.x <= spike.x + spike.width;
+
+    const isTouchingOnTop = this.y + this.height >= spike.y;
+    const isTouchingOnBottom = this.y <= spike.y + spike.height;
+
+    if (
+      isTouchingOnLeft &&
+      isTouchingOnRight &&
+      isTouchingOnTop &&
+      isTouchingOnBottom
+    ) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   draw() {
@@ -169,7 +186,7 @@ class Player {
       this.velocity += this.gravity;
       this.y += this.velocity;
       
-      // adding 5 as threshold so we dont bounce on moving platforms
+      // adding 5 as threshold so player doesnt bounce on moving platforms
       if (this.y > this.floor - 5) {
         this.y = this.floor;
         this.velocity = 0;

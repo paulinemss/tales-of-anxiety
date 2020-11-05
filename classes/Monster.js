@@ -109,7 +109,8 @@ class Monster {
    
     if (this.msg && subLevel === 3) {
       let xPosition = this.x; 
-      if (xPosition < 150) { xPosition = 150; }
+      if (xPosition < 120) { xPosition = 120; }
+      if (xPosition > 470) { xPosition = 470; }
       textSize(6);
       let msgBox = gameFont.textBounds(this.msg, xPosition, this.y - 40);
       fill(255);
